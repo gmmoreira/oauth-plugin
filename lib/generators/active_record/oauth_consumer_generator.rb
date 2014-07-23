@@ -26,7 +26,7 @@ module ActiveRecord
       end
 
       def copy_migration
-        migration_template 'migration.rb', 'db/migrate/create_oauth_consumer_tokens'
+        migration_template 'migration.rb', 'db/migrate/create_oauth_consumer_tokens.rb'
       end
     end
   end
