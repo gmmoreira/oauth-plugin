@@ -106,7 +106,7 @@ module Oauth
       end
 
       def destroy
-        throw RecordNotFound unless @token
+        throw ActiveRecord::RecordNotFound unless @token
         @token.destroy
         if params[:commit]=="Reconnect"
           redirect_to oauth_consumer_url(params[:id])
@@ -137,7 +137,7 @@ module Oauth
       end
 
       def load_consumer
-        throw RecordNotFound unless OAUTH_CREDENTIALS.include?(consumer_key)
+        throw ActiveRecord::RecordNotFound unless OAUTH_CREDENTIALS.include?(consumer_key)
         deny_access! unless logged_in? || consumer_credentials[:allow_login]
         @consumer="#{consumer_key.to_s.camelcase}Token".constantize
         @token=@consumer.where(:user_id=>current_user.id.to_s).first if logged_in?
